@@ -1,0 +1,27 @@
+<?php
+require_once '/app/views/trabajoView.php';
+?>
+<html>
+<head>
+    <title>Lista de Trabajos</title>
+</head>
+<body>
+    <h1>Lista de Trabajos Realizados</h1>
+    <table>
+        <tr>
+            <th>Cliente</th>
+            <th>Fecha</th>
+            <th>Trabajo Realizado</th>
+            <th>Descripción</th>
+        </tr>
+        <?php foreach ($trabajos as $trabajo): ?>
+            <tr>
+                <td><?= $trabajo['nombre'] ?></td>
+                <td><?= $trabajo['fecha_trabajo'] ?></td>
+                <td><?= $trabajo['trabajo_realizado'] ?></td>
+                <td><?= $trabajo['descripcion'] ?></td>
+            </tr>
+        <?php endforeach; ?>
+    </table>
+</body>
+</html>
