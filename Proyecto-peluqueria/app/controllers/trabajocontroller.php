@@ -1,21 +1,22 @@
 <?php
-require_once 'models/trabajoModel.php';
-require_once 'views/trabajoView.php';
+require_once 'app/models/trabajoModel.php';
+require_once 'app/views/trabajoView.php';
 
-class TrabajoController {
+class TrabajoController
+{
     private $model;
     private $view;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->model = new TrabajoModel();
         $this->view = new TrabajoView();
     }
 
-    public function obtenerTrabajos() {
-        return $this->model->obtenerTrabajos();
+    public function showTrabajos()
+    {
+        $trabajos =  $this->model->getTrabajos();
+
+        $this->view->showTrabajos($trabajos);
     }
 }
-
-$controller = new TrabajoController();
-
-?>

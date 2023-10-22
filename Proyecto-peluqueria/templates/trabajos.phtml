@@ -1,0 +1,123 @@
+<?php require_once 'header.phtml' ?>
+
+<h2 class="text-center">Fichero de trabajos</h2>
+
+<!-- <?php foreach ($clientes as $key => $cliente) : ?>
+
+    <?php foreach ($trabajos as $trabajo) : ?>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title"><?= $cliente->nombre ?></h5>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Cliente</th>
+                                    <th>Fecha de realización</th>
+                                    <th>Trabajo realizado</th>
+                                    <th>Descripción</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <?php if ($cliente->cliente_id == $trabajo->cliente_id) : ?>
+                                        <td><?= $trabajo->fecha_trabajo ?></td>
+                                        <td><?= $trabajo->trabajo_realizado ?></td>
+                                        <td><?= $trabajo->descripcion ?></td>
+                                    <?php endif ?>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <?php endforeach; ?>
+
+<?php endforeach; ?> -->
+
+<!-- <?php $clientesConTrabajos = array(); ?>
+
+<?php foreach ($trabajos as $trabajo) : ?>
+    <?= $cliente_id = $trabajo['cliente_id']; ?>
+
+    <?php if (!isset($clientesConTrabajos[$cliente_id])) : ?>
+        <?php $clientesConTrabajos[$cliente_id] = array(
+            'nombre' => $trabajo['NombreCliente'],
+            'trabajos' => array(),
+        ); ?>
+    <?php endif; ?>
+
+    <?php $clientesConTrabajos[$cliente_id]['trabajos'][] = array(
+        'fecha' => $trabajo['fecha_trabajo'],
+        'trabajo_realizado' => $trabajo['trabajo_realizado'],
+        'descripcion' => $trabajo['descripcion'],
+    ); ?>
+<?php endforeach; ?>
+
+<?php foreach ($clientesConTrabajos as $cliente) : ?>
+    <div class="card mb-3">
+        <div class="card-body">
+            <h5 class="card-title"><?= $cliente['nombre'] ?></h5>;
+            <ul class="list-group list-group-flush">
+                <?php foreach ($cliente['trabajos'] as $trabajo) : ?>
+                    <li class="list-group-item">
+                        Fecha: ' . <?= $trabajo['fecha'] ?>
+                        echo 'Trabajo Realizado: ' . $trabajo['trabajo_realizado'] . '<br>';
+                        echo 'Descripción: ' . $trabajo['descripcion'];
+                        echo '</li>';
+                <?php endforeach; ?>
+                echo '
+            </ul>';
+
+            echo '
+        </div>';
+        echo '
+    </div>';
+<?php endforeach; ?>
+?> -->
+
+<?php
+$clientes = array(); // Arreglo para rastrear clientes y sus trabajos
+
+foreach ($trabajos as $trabajo) {
+    $cliente_id = $trabajo['cliente_id'];
+
+    if (!isset($clientes[$cliente_id])) {
+        // Si es la primera vez que encontramos a este cliente, inicializamos un registro
+        $clientes[$cliente_id] = array(
+            'nombre' => $trabajo['NombreCliente'],
+            'trabajos' => array(),
+        );
+    }
+
+    // Agregamos los detalles del trabajo al arreglo de trabajos para el cliente
+    $clientes[$cliente_id]['trabajos'][] = array(
+        'fecha' => $trabajo['fecha_trabajo'],
+        'trabajo_realizado' => $trabajo['trabajo_realizado'],
+        'descripcion' => $trabajo['descripcion'],
+    );
+}
+?>
+
+<?php foreach ($clientes as $cliente) : ?>
+    <div class="card mb-3">
+        <div class="card-body">
+            <h5 class="card-title"><?php echo $cliente['nombre']; ?></h5>
+            <ul class="list-group list-group-flush">
+                <?php foreach ($cliente['trabajos'] as $trabajo) : ?>
+                    <li class="list-group-item">
+                        Fecha: <?php echo $trabajo['fecha']; ?><br>
+                        Trabajo Realizado: <?php echo $trabajo['trabajo_realizado']; ?><br>
+                        Descripción: <?php echo $trabajo['descripcion']; ?>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+    </div>
+<?php endforeach; ?>
+
+
+
+<?php require_once 'footer.phtml' ?>

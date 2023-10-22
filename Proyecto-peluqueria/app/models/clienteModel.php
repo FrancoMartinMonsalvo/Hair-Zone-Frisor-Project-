@@ -1,15 +1,15 @@
 <?php
-require_once '/configs/config.php';
+require_once 'model.php';
 
-class ClienteModel {
-    private $cliente_id;
-    private $nombre;
-    private $config;
-    
-    public function __construct(){
-        $this->cliente_id =  
-    }
-    public function getCliente($nombre){
-        
+class ClienteModel extends Model
+{
+
+    public function getCliente()
+    {
+        $stmt = $this->db->prepare('SELECT * FROM clientes');
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_OBJ);
+
+        return $result;
     }
 }
