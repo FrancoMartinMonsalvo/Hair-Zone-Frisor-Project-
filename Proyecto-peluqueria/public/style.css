@@ -6,6 +6,10 @@ body {
   background-color: #749bc2;
   & .listStyle {
     background: #91c8e4;
+    transition: background 0.3s linear;
+  }
+  & .listStyle:hover {
+    background: #2584aa;
   }
   & a {
     color: black;
