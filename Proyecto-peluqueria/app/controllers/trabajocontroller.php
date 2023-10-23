@@ -13,10 +13,10 @@ class TrabajoController
         $this->view = new TrabajoView();
     }
 
-    public function showTrabajos()
-    {
-        $trabajos =  $this->model->getTrabajos();
+    // public function showTrabajos()
+    // {
+    //     $trabajos =  $this->model->getTrabajos();
 
-        $this->view->showTrabajos($trabajos);
-    }
+    //     $this->view->showTrabajos($trabajos);
+    // }
 }

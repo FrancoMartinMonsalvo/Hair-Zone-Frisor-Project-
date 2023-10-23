@@ -1,47 +1,33 @@
 <?php require_once 'header.phtml' ?>
 
 <h2 class="text-center">Fichero de trabajos</h2>
-
-<?php
-$clientes = array(); // Arreglo para rastrear clientes y sus trabajos
-
-foreach ($trabajos as $trabajo) {
-    $cliente_id = $trabajo['cliente_id'];
-
-    if (!isset($clientes[$cliente_id])) {
-        // Si es la primera vez que encontramos a este cliente, inicializamos un registro
-        $clientes[$cliente_id] = array(
-            'nombre' => $trabajo['NombreCliente'],
-            'trabajos' => array(),
-        );
-    }
-
-    // Agregamos los detalles del trabajo al arreglo de trabajos para el cliente
-    $clientes[$cliente_id]['trabajos'][] = array(
-        'fecha' => $trabajo['fecha_trabajo'],
-        'trabajo_realizado' => $trabajo['trabajo_realizado'],
-        'descripcion' => $trabajo['descripcion'],
-    );
-}
-?>
-
-<?php foreach ($clientes as $cliente) : ?>
-    <div class="card mb-3">
-        <div class="card-body">
-            <h5 class="card-title"><?php echo $cliente['nombre']; ?></h5>
-            <ul class="list-group list-group-flush">
-                <?php foreach ($cliente['trabajos'] as $trabajo) : ?>
-                    <li class="list-group-item">
-                        Fecha: <?php echo $trabajo['fecha']; ?><br>
-                        Trabajo Realizado: <?php echo $trabajo['trabajo_realizado']; ?><br>
-                        Descripción: <?php echo $trabajo['descripcion']; ?>
-                    </li>
-                <?php endforeach; ?>
-            </ul>
+<div class="row mt-4 mx-2">
+    <?php foreach ($clients as $key => $client) : ?>
+        <div class="col-md-4 mb-4">
+            <div class="card mb-3">
+                <div class="card-body rounded contentList" style="height: 350px;">
+                    <div class="d-flex align-items-center">
+                        <h4 class="card-title">
+                            <a href="client/<?= $key ?>" style="text-decoration: none"><?= $client['cliente']->nombre ?></a>
+                        </h4>
+                        <p class="mb-1 ms-1">(<strong><?= $client['cliente']->telefono ?></strong>)</p>
+                    </div>
+                    <ul class="list-group">
+                        <?php foreach ($client['trabajos'] as $key => $trabajo) : ?>
+                            <?php if ($key < 2) : ?>
+                                <li class="list-group-item listStyle">
+                                    <strong>Fecha:</strong> <?= $trabajo->fecha_trabajo ?><br>
+                                    <strong>Trabajo Realizado:</strong> <?= $trabajo->trabajo_realizado ?><br>
+                                    <strong>Descripción:</strong> <?= $trabajo->descripcion ?><br>
+                                </li>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+            </div>
         </div>
-    </div>
-<?php endforeach; ?>
-
+    <?php endforeach; ?>
+</div>
 
 
 <?php require_once 'footer.phtml' ?>

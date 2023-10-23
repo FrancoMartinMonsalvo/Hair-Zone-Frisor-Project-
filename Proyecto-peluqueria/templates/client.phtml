@@ -1,0 +1,23 @@
+<?php require_once 'header.phtml' ?>
+
+<div class="card-body mx-5 p-2 rounded contentList" style="height: 350px;">
+    <div class="d-flex align-items-center">
+        <h4 class="card-title">
+            <a href="client/<?= $key ?>" style="text-decoration: none"><?= $client['cliente']->nombre ?></a>
+        </h4>
+        <p class="mb-1 ms-1">(<strong><?= $client['cliente']->telefono ?></strong>)</p>
+    </div>
+    <ul class="list-group">
+        <?php foreach ($client['trabajos'] as $key => $trabajo) : ?>
+            <?php if ($key < 2) : ?>
+                <li class="list-group-item listStyle">
+                    <strong>Fecha:</strong> <?= $trabajo->fecha_trabajo ?><br>
+                    <strong>Trabajo Realizado:</strong> <?= $trabajo->trabajo_realizado ?><br>
+                    <strong>Descripción:</strong> <?= $trabajo->descripcion ?><br>
+                </li>
+            <?php endif; ?>
+        <?php endforeach; ?>
+    </ul>
+</div>
+
+<?php require_once 'footer.phtml' ?>

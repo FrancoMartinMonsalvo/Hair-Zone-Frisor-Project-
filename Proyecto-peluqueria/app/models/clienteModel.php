@@ -3,10 +3,9 @@ require_once 'model.php';
 
 class ClienteModel extends Model
 {
-
-    public function getCliente()
+    public function getClient()
     {
-        $stmt = $this->db->prepare('SELECT * FROM clientes');
+        $stmt = $this->db->prepare('SELECT * FROM clientes ORDER BY clientes.nombre ASC');
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_OBJ);
 

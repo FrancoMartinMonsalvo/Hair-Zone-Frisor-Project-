@@ -1,0 +1,17 @@
+body {
+  background: #f6f4eb;
+}
+
+.contentList {
+  background-color: #749bc2;
+  & .listStyle {
+    background: #91c8e4;
+  }
+  & a {
+    color: black;
+    transition: color 0.3s linear;
+  }
+  & a:hover {
+    color: #f6f4eb;
+  }
+}
